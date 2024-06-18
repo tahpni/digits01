@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Video with Button</title>
     <style>
-        body, html {
+        body, html
+        {
             margin: 0;
             padding: 0;
             width: 100%;
@@ -17,19 +18,22 @@
             background-color: #000;
         }
 
-        #video-container, #gif-container {
+        #video-container, #gif-container
+        {
             position: relative;
             width: 640px;
             height: 360px;
         }
 
-        video, img {
+        video, img
+        {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        .button {
+        .button
+        {
             display: none;
             position: absolute;
             top: 50%;
@@ -46,7 +50,8 @@
             transition: opacity 1s;
         }
 
-        .button.show {
+        .button.show
+        {
             display: block;
             opacity: 1;
         }
@@ -71,19 +76,23 @@
             var videoContainer = document.getElementById('video-container');
             var beginButton = document.getElementById('beginButton');
 
-            introVideo.onended = function() {
+            introVideo.onended = function()
+            {
                 videoContainer.style.display = 'none';
                 gifContainer.style.display = 'block';
-                setTimeout(function() {
+                setTimeout(function()
+                {
                     beginButton.classList.add('show');
                 }, 100); // Small delay to ensure the button is displayed before starting the fade-in effect
             };
         });
 
-        function startProgram() {
+        function startProgram()
+        {
             fetch('/execute', { method: 'POST' })
                 .then(response => response.json())
-                .then(data => {
+                .then(data =>
+                {
                     alert(data.output);
                 });
         }
