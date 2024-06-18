@@ -2,10 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- HTML !-->
-    <button class="button-19" onclick="startProgram()">Click me to Begin</button>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video with Button</title>
+    <title>digits01</title>
     <style>
         body, html
         {
@@ -17,14 +15,14 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #000;
+            background-color: #4b4b4b;
         }
 
         #video-container, #gif-container
         {
             position: relative;
-            width: 640px;
-            height: 360px;
+            width: 960px;
+            height: 540px;
         }
 
         video, img
@@ -37,70 +35,75 @@
         
 
 /* CSS */
-.button-19 {
-  appearance: button;
-  background-color: #1899D6;
-  border: solid transparent;
-  border-radius: 16px;
-  border-width: 0 0 4px;
-  box-sizing: border-box;
-  color: #FFFFFF;
-  cursor: pointer;
-  display: inline-block;
-  font-family: din-round,sans-serif;
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: .8px;
-  line-height: 20px;
-  margin: 0;
-  outline: none;
-  overflow: visible;
-  padding: 13px 16px;
-  text-align: center;
-  text-transform: uppercase;
-  touch-action: manipulation;
-  transform: translateZ(0);
-  transition: filter .2s;
-  user-select: none;
-  -webkit-user-select: none;
-  vertical-align: middle;
-  white-space: nowrap;
-  width: 100%;
-}
 
-.button-19:after {
-  background-clip: padding-box;
-  background-color: #1CB0F6;
-  border: solid transparent;
-  border-radius: 16px;
-  border-width: 0 0 4px;
-  bottom: -4px;
-  content: "";
-  left: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
-  z-index: -1;
-}
+        .button-19 {
+            appearance: button;
+            background-color: #1899D6;
+            border: solid transparent;
+            border-radius: 22px;
+            border-width: 0 0 8px;
+            box-sizing: border-box;
+            color: #FFFFFF;
+            cursor: pointer;
+            display: inline-block;
+            font-family: din-round, sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: .8px;
+            line-height: 20px;
+            margin: 0;
+            outline: none;
+            overflow: visible;
+            padding: 8px 16px;
+            text-align: center;
+            text-transform: uppercase;
+            touch-action: manipulation;
+            transform: translateZ(0);
+            transition: filter .2s;
+            user-select: none;
+            -webkit-user-select: none;
+            vertical-align: middle;
+            white-space: nowrap;
+            position: absolute;
+            top: 80%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+        }
 
-.button-19:main,
-.button-19:focus {
-  user-select: auto;
-}
+        .button-19:after {
+            background-clip: padding-box;
+            background-color: #1CB0F6;
+            border: solid transparent;
+            border-radius: 16px;
+            border-width: 0 0 4px;
+            bottom: -4px;
+            content: "";
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            z-index: -1;
+        }
 
-.button-19:hover:not(:disabled) {
-  filter: brightness(1.1);
-  -webkit-filter: brightness(1.1);
-}
+        .button-19:main,
+        .button-19:focus {
+            user-select: auto;
+        }
 
-.button-19:disabled {
-  cursor: auto;
-}
+        .button-19:hover:not(:disabled) {
+            filter: brightness(1.1);
+            -webkit-filter: brightness(1.1);
+        }
 
-.button-19:active {
-  border-width: 4px 0 0;
-  background: none;
-}
+        .button-19:disabled {
+            cursor: auto;
+        }
+
+        .button-19:active {
+            border-width: 4px 0 0;
+            background: none;
+        }
     </style>
 </head>
 <body>
@@ -112,6 +115,8 @@
     </div>
     <div id="gif-container" style="display: none;">
         <img src="{{ url_for('static', filename='media/loopvideo.gif') }}" alt="Looping GIF">
+        <button id="beginButtonGif" class="button-19" onclick="startProgram()">Let's Start</button>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -119,13 +124,14 @@
             var gifContainer = document.getElementById('gif-container');
             var videoContainer = document.getElementById('video-container');
             var beginButton = document.getElementById('beginButton');
+            var beginButtonGif = document.getElementById('beginButtonGif');
 
             introVideo.onended = function() {
                 videoContainer.style.display = 'none';
                 gifContainer.style.display = 'block';
                 setTimeout(function() {
-                    beginButton.classList.add('show');
-                }, 100); // Small delay to ensure the button is displayed before starting the fade-in effect
+                    beginButtonGif.classList.add('show');
+                }, 100);
             };
         });
 
