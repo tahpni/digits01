@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <!-- HTML !-->
-    <button class="button-19" role="button">Button 19</button>
+    <button class="button-19" onclick="startProgram()">Click me to Begin</button>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Video with Button</title>
     <style>
@@ -112,8 +112,6 @@
     </div>
     <div id="gif-container" style="display: none;">
         <img src="{{ url_for('static', filename='media/loopvideo.gif') }}" alt="Looping GIF">
-        <button id="beginButton" class="button" onclick="startProgram()">Begin</button>
-    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
