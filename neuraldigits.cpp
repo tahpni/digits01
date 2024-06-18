@@ -1,23 +1,17 @@
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <stdio.h>
+from flask import Flask, render_template, jsonify
+import subprocess
 
-int main(void) 
-{
-    std::ifstream file("image_path.txt");
-    if (!file.is_open()) 
-    {
-        return 1;
-    }
+app = Flask(__name__)
 
-    std::string imagePath;
-    std::getline(file, imagePath);
-    file.close();
+@app.route('/')
+def index():
+    return render_template('index.html')
 
-    std::cout << "Image path: " << imagePath << std::endl;
+@app.route('/execute_draw', methods=['POST'])
+def execute_draw():
+    # Run the draw script
+    result = subprocess.run(['python', 'draw.py'], capture_output=True, text=True)
+    return jsonify({'output': result.stdout})
 
-    // You can add code here to process the image using the path
-
-    return 0;
-}
+if __name__ == '__main__':
+    app.run(debug=True)
