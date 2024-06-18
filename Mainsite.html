@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Video</title>
+    <style>
+        #startButton {
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<video id="video" width="640" height="360" controls>
+    <source src="final_video.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+<button id="startButton" onclick="startProgram()">Start Program</button>
+
+<script>
+    var video = document.getElementById('video');
+    var startButton = document.getElementById('startButton');
+
+    video.onended = function() {
+        startButton.style.display = 'block';
+    };
+
+    function startProgram() {
+        alert("Program Started!");
+        // Your program start logic here
+    }
+</script>
+
+</body>
+</html>
