@@ -46,9 +46,23 @@
         var startButton = document.getElementById('startButton');
 
         mainVideo.onended = function() {
+            // Hide the main video and show the static video
             mainVideo.style.display = 'none';
             staticVideo.style.display = 'block';
             staticVideo.play();
+            // Display the start button and fade it in
             startButton.style.display = 'block';
             setTimeout(function() {
-   
+                startButton.style.opacity = 1;
+            }, 100); // Small delay to ensure the button is displayed before starting the fade-in effect
+        };
+
+        window.startProgram = function() {
+            alert("Program Started!");
+            // Your program start logic here
+        };
+    });
+</script>
+
+</body>
+</html>
