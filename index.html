@@ -48,35 +48,40 @@
   </video>
 </body>
   <script>
+    do
+    {
+      setTimeout(function(), 500);
+    }
+    while (document.readyState == 'loading');
     document.addEventListener('DOMContentLoaded', function()
     {
       var Intro = document.getElementById('Intro');
       var pythonstart = document.getElementById('pythonstart');
       var LoopVideo = "media/videos/LoopVideo.mp4";
+    }
       
-      Intro.onended = function()
-      {
-          Intro.src = LoopVideo;
-          Intro.loop = true;
-          Intro.play();
-          pythonstart.style.display = 'block';
-          // Delay
-          setTimeout(function()
-          {
-              startButton.style.opacity = 1;
-          }, 100);
-      };
-      window.startProgram = function()
-      {
-          fetch('/execute', { method: 'POST' })
-              .then(response => response.json())
-              .then(data =>
-              {
-                alert(data.output);
-                mainVideo.loop = false; // Stop looping after button is pressed
-                pythonstart.style.display = 'none';
-              });
-      };
-  });
+    Intro.onended = function()
+    {
+        Intro.src = LoopVideo;
+        Intro.loop = true;
+        Intro.play();
+        pythonstart.style.display = 'block';
+        // Delay
+        setTimeout(function()
+        {
+            startButton.style.opacity = 1;
+        }, 100);
+    };
+    window.startProgram = function()
+    {
+        fetch('/execute', { method: 'POST' })
+            .then(response => response.json())
+            .then(data =>
+            {
+              alert(data.output);
+              mainVideo.loop = false; // Stop looping after button is pressed
+              pythonstart.style.display = 'none';
+            });
+   };
   </script>
 </html>
