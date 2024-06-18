@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>digits01</title>
-    <style>
-        body, html
-        {
-            justify-content: center;
-            align-items: center;
-            background-color: #f0f0f0;
-        }
-        #video-container
-        {
-            width: 1280px;
-            height: 720px;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>digits01</title>
+  <style>
+      body
+      {
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #000;
+      }
+      video
+      {
+        max-width: 100%;
+        max-height: 100%;
+      }
     </style>
 </head>
 <body>
-    <div id="video-container">
-    <video controls width="250">
-    <source src="media/videos/Intro.mp4" type="video/mp4" />
-    </video>
+  <video autoplay muted>
+    <source src="media/videos/Intro.mp4" type="video/mp4">
+    The browser failed to run mp4--Please reload.
+  </video>
 </body>
 </html>
