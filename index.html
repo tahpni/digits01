@@ -1,44 +1,54 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Video</title>
+    <title>digits01 by tapni</title>
     <style>
         #startButton {
             display: none;
-            margin-top: 20px;
             opacity: 0;
             transition: opacity 1s;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+        #video-container {
+            position: relative;
+            width: 640px;
+            height: 360px;
+        }
+        video {
+            width: 100%;
+            height: 100%;
         }
     </style>
 </head>
 <body>
 
-<video id="video" width="640" height="360" controls>
-    <source src="final_video.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-</video>
-<button id="startButton" onclick="startProgram()">Start Program</button>
+<div id="video-container">
+    <video id="Video" controls>
+        <source src="media/videos/Intro.mp4" type="video/mp4">
+        Issue with mp4? Reload the site.
+    </video>
+    <video id="staticVideo" loop style="display: none;">
+        <source src="media/videos/LoopVideo.mp4" type="video/mp4">
+        Issue with mp4? Reload the site.
+    </video>
+    <button id="Begin the Adventure" onclick="startProgram()">Start Program</button>
+</div>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        var video = document.getElementById('video');
+        var mainVideo = document.getElementById('mainVideo');
+        var staticVideo = document.getElementById('staticVideo');
         var startButton = document.getElementById('startButton');
 
-        video.onended = function() {
+        mainVideo.onended = function() {
+            mainVideo.style.display = 'none';
+            staticVideo.style.display = 'block';
+            staticVideo.play();
             startButton.style.display = 'block';
             setTimeout(function() {
-                startButton.style.opacity = 1;
-            }, 100); // small delay to ensure the button is displayed before starting the fade-in effect
-        };
-
-        window.startProgram = function() {
-            alert("Program Started!");
-            // Your program start logic here
-        };
-    });
-</script>
-
-</body>
-</html>
+   
