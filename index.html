@@ -12,21 +12,9 @@
 </head>
 <body>
 
-const video = document.querySelector('video')
-const source = document.querySelector('source')
-
-video.appendChild(source)
-video.play()
-
-const changeVideoButton = document.querySelector('#changeVideo')
-changeVideo.addEventListener('click', e => {
-  video.pause()
-  
-  source.setAttribute('src', 'media/videos/Intro.mp4')
-  
-  video.load()
-  video.play()
-})
+<video controls width="250">
+  <source src="media/videos/Intro.mp4" type="video/mp4" />
+</video>
 
 </body>
 </html>
