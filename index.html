@@ -8,13 +8,15 @@
         #startButton {
             display: none;
             margin-top: 20px;
+            opacity: 0;
+            transition: opacity 1s;
         }
     </style>
 </head>
 <body>
 
-<video id="video" width="800" height="350" controls>
-    <source src="media/videos/Intro.mp4" type="video/mp4">
+<video id="video" width="640" height="360" controls>
+    <source src="final_video.mp4" type="video/mp4">
     Your browser does not support the video tag.
 </video>
 <button id="startButton" onclick="startProgram()">Start Program</button>
@@ -26,6 +28,9 @@
 
         video.onended = function() {
             startButton.style.display = 'block';
+            setTimeout(function() {
+                startButton.style.opacity = 1;
+            }, 100); // small delay to ensure the button is displayed before starting the fade-in effect
         };
 
         window.startProgram = function() {
