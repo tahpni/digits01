@@ -4,6 +4,10 @@ import subprocess
 app = Flask(__name__)
 
 @app.route('/')
+def initialize_digits():
+    subprocess.run(['./neuraldigits'])
+
+@app.route('/')
 def index():
     return render_template('index.html')
 
