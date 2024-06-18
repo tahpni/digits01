@@ -37,14 +37,7 @@ class DrawingModule:
         self.old_y = None
 
     def submit_canvas(self):
-        # Get the canvas coordinates
-        x = self.root.winfo_rootx() + self.canvas.winfo_x()
-        y = self.root.winfo_rooty() + self.canvas.winfo_y()
-        x1 = x + self.canvas.winfo_width()
-        y1 = y + self.canvas.winfo_height()
-
-        # Capture the canvas area
-        img = ImageGrab.grab().crop((x, y, x1, y1))
+        img = ImageGrab
 
         # Save the image to a temporary location
         temp_path = "temp_image.png"
