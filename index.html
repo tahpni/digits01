@@ -13,24 +13,26 @@
 </head>
 <body>
 
-<video id="video" width="960" height="540" controls>
+<video id="video" width="800" height="350" controls>
     <source src="media/videos/Intro.mp4" type="video/mp4">
     Your browser does not support the video tag.
 </video>
-<button id="Begin Program" onclick="startProgram()">Start Program</button>
+<button id="startButton" onclick="startProgram()">Start Program</button>
 
 <script>
-    var video = document.getElementById('video');
-    var startButton = document.getElementById('startButton');
+    document.addEventListener('DOMContentLoaded', function() {
+        var video = document.getElementById('video');
+        var startButton = document.getElementById('startButton');
 
-    video.onended = function() {
-        startButton.style.display = 'block';
-    };
+        video.onended = function() {
+            startButton.style.display = 'block';
+        };
 
-    function startProgram() {
-        alert("Program Started!");
-        // Your program start logic here
-    }
+        window.startProgram = function() {
+            alert("Program Started!");
+            // Your program start logic here
+        };
+    });
 </script>
 
 </body>
