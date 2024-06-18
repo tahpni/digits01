@@ -1,79 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>digits01</title>
-  <style>
-      body
-      {
-        margin: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        background-color: #908c8c;
-      }
-      video
-      {
-        max-width: 100%;
-        max-height: 100%;
-      }
-      #Start {
-        display: none;
-        opacity: 0;
-        transition: opacity 1s;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 10; /* Make sure it stays on top */
-        padding: 10px 20px;
-        font-size: 16px;
-        cursor: pointer;
-      }
-      #video-container {
-        position: relative;
-        width: 100%;
-        height: 100%;
-      }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video with Button</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000;
+        }
+
+        #video-container, #gif-container {
+            position: relative;
+            width: 640px;
+            height: 360px;
+        }
+
+        video, img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .button {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 12px 40px;
+            font-size: 20px;
+            border: none;
+            border-radius: 8px;
+            background-color: #236ec3;
+            color: white;
+            cursor: pointer;
+            z-index: 2;
+            transition: opacity 1s;
+        }
+
+        .button.show {
+            display: block;
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
-  <div id="video-container">
-    <video id="Intro" autoplay>
-      <source src='loop.mp4' type="video/mp4">
-      Video failed to load. (Error: 1)
-    </video>
-    <button id="Start" onclick="startProgram()">Start</button>
-  </div>
+    <div id="video-container">
+        <video id="introVideo" autoplay muted>
+            <source src="{{ url_for('static', filename='media/Intro.mp4') }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div id="gif-container" style="display: none;">
+        <img src="{{ url_for('static', filename='media/loopvideo.gif') }}" alt="Looping GIF">
+        <button id="beginButton" class="button" onclick="startProgram()">Begin</button>
+    </div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      var Intro = document.getElementById('Intro');
-      var startButton = document.getElementById('startButton');
-      var LoopVideo = "media/videos/Loop.mp4";
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var introVideo = document.getElementById('introVideo');
+            var gifContainer = document.getElementById('gif-container');
+            var videoContainer = document.getElementById('video-container');
+            var beginButton = document.getElementById('beginButton');
 
-      Intro.onended = function() {
-        Intro.src = LoopVideo;
-        Intro.loop = true;
-        Intro.play();
-        startButton.style.display = 'block';
-        setTimeout(function() {
-          startButton.style.opacity = 1;
-        }, 100); // Small delay to ensure the button is displayed before starting the fade-in effect
-      };
+            introVideo.onended = function() {
+                videoContainer.style.display = 'none';
+                gifContainer.style.display = 'block';
+                setTimeout(function() {
+                    beginButton.classList.add('show');
+                }, 100); // Small delay to ensure the button is displayed before starting the fade-in effect
+            };
+        });
 
-      window.startProgram = function() {
-        fetch('/execute', { method: 'POST' })
-          .then(response => response.json())
-          .then(data => {
-            alert(data.output);
-            Intro.loop = false; // Stop looping after button is pressed
-            startButton.style.display = 'none';
-          });
-      };
-    });
-  </script>
+        function startProgram() {
+            fetch('/execute', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.output);
+                });
+        }
+    </script>
 </body>
 </html>
