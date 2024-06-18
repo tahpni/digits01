@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>digits01</title>
   <style>
-      body {
+      body
+      {
         margin: 0;
         display: flex;
         justify-content: center;
@@ -13,11 +14,12 @@
         height: 100vh;
         background-color: #908c8c;
       }
-      video {
+      video
+      {
         max-width: 100%;
         max-height: 100%;
       }
-      #startButton {
+      #Start {
         display: none;
         opacity: 0;
         transition: opacity 1s;
@@ -25,7 +27,7 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        z-index: 10; /* Ensure it stays on top of the video */
+        z-index: 10; /* Make sure it stays on top */
         padding: 10px 20px;
         font-size: 16px;
         cursor: pointer;
@@ -39,11 +41,11 @@
 </head>
 <body>
   <div id="video-container">
-    <video id="Intro" autoplay muted>
-      <source src="media/videos/Intro.mp4" type="video/mp4">
-      Your browser does not support the video tag. Please reload.
+    <video id="Intro" autoplay>
+      <source src='loop.mp4' type="video/mp4">
+      Video failed to load. (Error: 1)
     </video>
-    <button id="startButton" onclick="startProgram()">Start Program</button>
+    <button id="Start" onclick="startProgram()">Start</button>
   </div>
 
   <script>
