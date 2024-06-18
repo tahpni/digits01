@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>digits01</title>
   <style>
-      body
-      {
+      body {
         margin: 0;
         display: flex;
         justify-content: center;
@@ -14,13 +13,11 @@
         height: 100vh;
         background-color: #908c8c;
       }
-      video
-      {
+      video {
         max-width: 100%;
         max-height: 100%;
       }
-      #startButton
-      {
+      #startButton {
         display: none;
         opacity: 0;
         transition: opacity 1s;
@@ -28,14 +25,12 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        /* z index keeps the button on top */
-        z-index: 10;
+        z-index: 10; /* Ensure it stays on top of the video */
         padding: 10px 20px;
         font-size: 16px;
         cursor: pointer;
       }
-      #video-container
-      {
+      #video-container {
         position: relative;
         width: 100%;
         height: 100%;
@@ -43,45 +38,40 @@
     </style>
 </head>
 <body>
-    <source src="media/videos/Intro.mp4" type="video/mp4">
-    The browser failed to run mp4.. please reload.
-  </video>
-</body>
+  <div id="video-container">
+    <video id="Intro" autoplay muted>
+      <source src="media/videos/Intro.mp4" type="video/mp4">
+      Your browser does not support the video tag. Please reload.
+    </video>
+    <button id="startButton" onclick="startProgram()">Start Program</button>
+  </div>
+
   <script>
-    do
-    {
-      setTimeout(function(), 500);
-    }
-    while (document.readyState == 'loading');
-    document.addEventListener('DOMContentLoaded', function()
-    {
+    document.addEventListener('DOMContentLoaded', function() {
       var Intro = document.getElementById('Intro');
-      var pythonstart = document.getElementById('pythonstart');
-      var LoopVideo = "media/videos/LoopVideo.mp4";
-    }
-      
-    Intro.onended = function()
-    {
+      var startButton = document.getElementById('startButton');
+      var LoopVideo = "media/videos/Loop.mp4";
+
+      Intro.onended = function() {
         Intro.src = LoopVideo;
         Intro.loop = true;
         Intro.play();
-        pythonstart.style.display = 'block';
-        // Delay
-        setTimeout(function()
-        {
-            startButton.style.opacity = 1;
-        }, 100);
-    };
-    window.startProgram = function()
-    {
+        startButton.style.display = 'block';
+        setTimeout(function() {
+          startButton.style.opacity = 1;
+        }, 100); // Small delay to ensure the button is displayed before starting the fade-in effect
+      };
+
+      window.startProgram = function() {
         fetch('/execute', { method: 'POST' })
-            .then(response => response.json())
-            .then(data =>
-            {
-              alert(data.output);
-              mainVideo.loop = false; // Stop looping after button is pressed
-              pythonstart.style.display = 'none';
-            });
-   };
+          .then(response => response.json())
+          .then(data => {
+            alert(data.output);
+            Intro.loop = false; // Stop looping after button is pressed
+            startButton.style.display = 'none';
+          });
+      };
+    });
   </script>
+</body>
 </html>
