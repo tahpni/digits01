@@ -1,6 +1,6 @@
 My first project.
 
-A Digit Identifier using Java, Python, and C++.
+A ML Digit Identifier using Python and C++.
 
 ## Instructions
 - Run app.py
