@@ -4,137 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>digits01</title>
-    <style>
-        body, html
-        {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #4b4b4b;
-        }
-
-        #video-container, #gif-container
-        {
-            position: relative;
-            width: 960px;
-            height: 540px;
-        }
-
-        video, img
-        {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-/* CSS taken from Duolingo */
-
-        .button-19 {
-            appearance: button;
-            background-color: #1899D6;
-            border: solid transparent;
-            border-radius: 22px;
-            border-width: 0 0 8px;
-            box-sizing: border-box;
-            color: #FFFFFF;
-            cursor: pointer;
-            display: inline-block;
-            font-family: din-round, sans-serif;
-            font-size: 16px;
-            font-weight: 700;
-            letter-spacing: .8px;
-            line-height: 20px;
-            margin: 0;
-            outline: none;
-            overflow: visible;
-            padding: 8px 16px;
-            text-align: center;
-            text-transform: uppercase;
-            touch-action: manipulation;
-            transform: translateZ(0);
-            transition: filter .2s;
-            user-select: none;
-            -webkit-user-select: none;
-            vertical-align: middle;
-            white-space: nowrap;
-            position: absolute;
-            top: 80%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 3;
-        }
-
-        .button-19:after {
-            background-clip: padding-box;
-            background-color: #1CB0F6;
-            border: solid transparent;
-            border-radius: 16px;
-            border-width: 0 0 4px;
-            bottom: -4px;
-            content: "";
-            left: 0;
-            position: absolute;
-            right: 0;
-            top: 0;
-            z-index: -1;
-        }
-
-        .button-19:main,
-        .button-19:focus {
-            user-select: auto;
-        }
-
-        .button-19:hover:not(:disabled) {
-            filter: brightness(1.1);
-            -webkit-filter: brightness(1.1);
-        }
-
-        .button-19:disabled {
-            cursor: auto;
-        }
-
-        .button-19:active {
-            border-width: 4px 0 0;
-            background: none;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <div id="video-container">
         <video id="introVideo" autoplay muted>
             <source src="{{ url_for('static', filename='media/Intro.mp4') }}" type="video/mp4">
-            Your browser does not support the video tag.
+            The MP4 failed to load. Please use another Browser.
         </video>
     </div>
     <div id="gif-container" style="display: none;">
+        <link rel="stylesheet" href="button.css">
         <img src="{{ url_for('static', filename='media/loopvideo.gif') }}" alt="Looping GIF">
-        <button id="beginButtonGif" class="button-19" onclick="startProgram()">Let's Start</button>
-    </div>
+        <button class="button-19" id="startbut" onclick="startProgram()">Draw a Number</button>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var introVideo = document.getElementById('introVideo');
             var gifContainer = document.getElementById('gif-container');
             var videoContainer = document.getElementById('video-container');
-            var beginButton = document.getElementById('beginButton');
-            var beginButtonGif = document.getElementById('beginButtonGif');
+            var startbutton = document.getElementById('startbut');
 
             introVideo.onended = function() {
                 videoContainer.style.display = 'none';
                 gifContainer.style.display = 'block';
                 setTimeout(function() {
-                    beginButtonGif.classList.add('show');
+                    startbutton.style.display = 'inline-block';
+                    startbutton.classList.add('show');
                 }, 100);
             };
         });
-
-        function startProgram() {
-            fetch('/execute_draw', { method: 'POST' })
+        function startProgram()
+        {
+            fetch('/execute_draw', {method: 'POST'})
                 .then(response => response.json())
                 .then(data => {
                     alert(data.output);
