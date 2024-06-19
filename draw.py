@@ -1,5 +1,5 @@
 import tkinter as tk
-import requests as req
+import subprocess as exec
 from tkinter import colorchooser, filedialog, ttk
 from matplotlib import pyplot as plt
 import PIL.ImageGrab as ImageGrab
@@ -54,10 +54,14 @@ class DrawingModule:
         y1 = self.canvas.winfo_rooty()
         x2 = x1 + self.canvas.winfo_width()
         y2 = y1 + self.canvas.winfo_height()
-
         ImageGrab.grab(bbox = (x1, y1, x2, y2)).save("UserInput.png")
-        response = req.post('http://localhost:5000/execute_neural')
-        exit()
+
+        exec.run(["g++", "neuraldigits.cpp", "-o", "neuraldigits"])
+        process = exec.Popen(['./neuraldigits'], stdout=exec.PIPE, stderr=exec.PIPE)
+        run_process = exec.Popen(['./neuraldigits'], stdout=exec.PIPE, stderr=exec.PIPE)
+        stdout, stderr = run_process.communicate()
+        print(stdout.decode())
+        print(stderr.decode())
 if __name__ == "__main__":
     root = tk.Tk()
     app = DrawingModule(root)
