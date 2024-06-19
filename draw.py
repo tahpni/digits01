@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import colorchooser, filedialog, ttk
+from matplotlib import pyplot as plt
 import PIL.ImageGrab as ImageGrab
 import os
 
@@ -37,19 +38,20 @@ class DrawingModule:
         self.old_y = None
 
     def submit_canvas(self):
-        img = ImageGrab
+       # Save the canvas content as an image file
+        x = self.root.winfo_rootx() + self.canvas.winfo_x()
+        y = self.root.winfo_rooty() + self.canvas.winfo_y()
+        x1 = x + self.canvas.winfo_width()
+        y1 = y + self.canvas.winfo_height()
 
-        # Save the image to a temporary location
-        temp_path = "temp_image.png"
-        img.save(temp_path)
-
-        # Export the image path to a file for the C++ program
-        with open('image_path.txt', 'w') as file:
-            file.write(temp_path)
-
-        # Optionally, you can call the C++ executable here
-        os.system('./neuraldigits')   
-
+        # Grab the image from the canvas and save it
+        ImageGrab.grab().crop((x, y, x1, y1)).save("UserInput.png") 
+    
+        
+        fetch('/execute_draw', { method: 'POST' })
+        then(response) => {response.json()
+        then(data) => {alert(data.output)};
+        }
 if __name__ == "__main__":
     root = tk.Tk()
     app = DrawingModule(root)
