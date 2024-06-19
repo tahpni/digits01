@@ -1,17 +1,65 @@
-from flask import Flask, render_template, jsonify
-import subprocess
+#include <iostream>
+#include <ios>
+#include <vector>
+#include <random>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
 
-app = Flask(__name__)
+// Take in data from DigitGUI Program
 
-@app.route('/')
-def index():
-    return render_template('index.html')
+const unsigned char image_data[] =
+{
+    // IMAGE_DATA_PLACEHOLDER
+};
 
-@app.route('/execute_draw', methods=['POST'])
-def execute_draw():
-    # Run the draw script
-    result = subprocess.run(['python', 'draw.py'], capture_output=True, text=True)
-    return jsonify({'output': result.stdout})
+int main() {
+    std::cout << "Image data loaded. Size: " << sizeof(image_data) << " bytes." << std::endl;
+    // Further processing of image_data can be done here
+    return 0;
+}
+// Sigmoid activation function to fix output between 0 and 1
+double sigmoid(double x)
+{
+  return 1.0 / (1.0 + exp(-x));
+}
 
-if __name__ == '__main__':
-    app.run(debug=True)
+class Neuron
+{
+  // Public is used instead of struct because thats how people do it lol
+  public:
+    // Initialize program output, bias, and weights.
+    double output;
+    double bias;
+    std::vector<double> weights;
+
+    // Create random neurons for the data to train off of
+    Neuron(int inputs)
+    {
+      bias = 0;
+      for (int i = 0; i < inputs; ++i)
+      {
+        // Append to each weight
+        weights.push_back(0);
+      }
+        
+    }
+    // create a way to calculate the output of each vector
+    // use a constant reference because its faster than copying the whole thing, like malan said
+    double CalcOutput(const std::vector<double>& inputs)
+    { 
+      double sum = 0.0;
+      size_t i = 0;
+      for (i = 0; i < inputs.size(); ++i) 
+      {
+        sum += inputs[i] * weights[i];
+      }
+      output = sigmoid(sum + bias);
+      return output;
+    }
+};
+    
+int main ()
+{
+    printf("Hello World");
+}
