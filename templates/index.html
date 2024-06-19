@@ -17,7 +17,6 @@
         <link rel="stylesheet" href="button.css">
         <img src="{{ url_for('static', filename='media/loopvideo.gif') }}" alt="Looping GIF">
         <button class="button-19" id="startbut" onclick="startProgram()">Draw a Number</button>
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var introVideo = document.getElementById('introVideo');
@@ -34,6 +33,7 @@
                 }, 100);
             };
         });
+        // START NEXT PROGRAM
         function startProgram()
         {
             fetch('/execute_draw', {method: 'POST'})
