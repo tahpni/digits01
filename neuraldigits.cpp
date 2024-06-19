@@ -6,18 +6,6 @@
 #include <cstdlib>
 #include <ctime>
 
-// Take in data from DigitGUI Program
-
-const unsigned char image_data[] =
-{
-    // IMAGE_DATA_PLACEHOLDER
-};
-
-int main() {
-    std::cout << "Image data loaded. Size: " << sizeof(image_data) << " bytes." << std::endl;
-    // Further processing of image_data can be done here
-    return 0;
-}
 // Sigmoid activation function to fix output between 0 and 1
 double sigmoid(double x)
 {
@@ -61,5 +49,9 @@ class Neuron
     
 int main ()
 {
+    const unsigned char image_data[] =
+    {
+        Userinput = UserInput.png
+    };
     printf("Hello World");
 }
