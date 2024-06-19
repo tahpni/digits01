@@ -10,8 +10,10 @@ def index():
 @app.route('/execute_draw', methods=['POST'])
 def execute_draw():
     # Run the draw script
-    result = subprocess.run(['python', 'draw.py'], capture_output=True, text=True)
+    result = subprocess.run(['python', 'draw.py'])
     return jsonify({'output': result.stdout})
+
+@app.route('/executeneural', sub.run(“./neuraldigits.cpp”, shell=True)
 
 if __name__ == '__main__':
     app.run(debug=True)
