@@ -1,5 +1,3 @@
-My first project.
-
 A ML Digit Identifier using Python and C++.
 
 ## Instructions
