@@ -4,6 +4,3 @@ A ML Digit Identifier using Python and C++.
 - Run draw.py
 - Draw a number
 - The program will predict which number you drew
-
-## Tutorial
-A step by step tutorial on how to make this will be posted soon on YouTube.
